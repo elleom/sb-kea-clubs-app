@@ -19,19 +19,21 @@ import java.util.Objects;
 @Setter
 @ToString
 @Builder
-
 public class Event {
 
-
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id", nullable = false)
     private Long id;
 
-    private String userId;
+    private Long userId;
     private String type;
     private String description;
+    @Column(name= "image_url", nullable = false)
     private String imageUrl;
+    @Column(name= "start_date", nullable = false)
     private Date startDate;
+    @Column(name= "end_date", nullable = false)
     private Date endDate;
     private String Location;
 
