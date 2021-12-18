@@ -9,6 +9,7 @@ services:
 before_install:
   # login to docker registries
   - echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_USERNAME" --password-stdin
+  - echo "$DOCKER_PASSWORD"
 
 install:
   - mvn -N io.takari:maven:wrapper
