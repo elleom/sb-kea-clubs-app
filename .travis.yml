@@ -7,19 +7,29 @@ services:
   - docker
 
 before_install:
+
   # login to docker registries
   - echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_USERNAME" --password-stdin
-  - docker build -t dlskeasp/kea-clubs-app .
-  - docker tag dlskeasp/kea-clubs-app dlskeasp/kea-clubs-app
 
 install:
   - mvn -N io.takari:maven:wrapper
-  - ./mvnw install -Dmaven.javadoc.skip=true -B -V
+  - ./mvnw install -DskipTests=true -Dmaven.javadoc.skip=true -B -V
+
+
+script:
+  # build docker images
+  - docker build -t dlskeasp/kea-clubs-apps .
+  - docker tag dlskeasp/kea-clubs-apps dlskeasp/kea-clubs-apps
 
 deploy:
+  # provider: heroku
+  # api_key: $HEROKU_API_KEY
+  # app: school-protocol
+  # on:
+  # all_branches: true
   provider: script
   script:
     # push to dockerhub
-    docker push dlskeasp/kea-clubs-apps
+    docker push dlskeasp/kea-clubs-apps;
   on:
     all_branches: true
