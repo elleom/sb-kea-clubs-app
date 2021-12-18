@@ -2,13 +2,13 @@ package com.kea.sbkeaclubsapp.controller;
 
 import com.kea.sbkeaclubsapp.model.Event;
 import com.kea.sbkeaclubsapp.repositories.EventRepository;
-import net.minidev.json.JSONArray;
-import net.minidev.json.JSONObject;
-import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.*;
-import reactor.core.publisher.Mono;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * @author el_le

@@ -1,0 +1,30 @@
+sudo: required
+language: java
+jdk:
+  - openjdk11
+
+services:
+  - docker
+
+before_install:
+
+  # login to docker registries
+  - echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_USERNAME" --password-stdin
+
+install:
+  - mvn -N io.takari:maven:wrapper
+  - ./mvnw install -Dmaven.javadoc.skip=true -B -V
+
+
+script:
+  # build docker images
+  - docker build -t oelleo/kea-clubs-app .
+  - docker tag oelleo/kea-clubs-app oelleo/kea-clubs-app
+
+deploy:
+  provider: script
+  script:
+    # push to dockerhub
+    docker push oelleo/kea-clubs-app;
+  on:
+    all_branches: true
