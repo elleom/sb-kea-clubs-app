@@ -9,7 +9,6 @@ services:
 before_install:
   # login to docker registries
   - echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_USERNAME" --password-stdin
-  - echo "$DOCKER_PASSWORD"
 
 install:
   - mvn -N io.takari:maven:wrapper
@@ -25,6 +24,6 @@ deploy:
   provider: script
   script:
     # push to dockerhub
-    docker push dlskeasp/kea-clubs-apps:latest
+    docker push dlskeasp/kea-clubs-apps
   on:
     all_branches: true
