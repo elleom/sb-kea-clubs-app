@@ -18,13 +18,13 @@ install:
 
 script:
   # build docker images
-  - docker build -t oelleo/kea-clubs-app .
-  - docker tag oelleo/kea-clubs-app oelleo/kea-clubs-app
+  - docker build -t dlskeasp/kea-clubs-app .
+  - docker tag dlskeasp/kea-clubs-app dlskeasp/kea-clubs-app
 
 deploy:
   provider: script
   script:
     # push to dockerhub
-    docker push oelleo/kea-clubs-app;
+    docker push dlskeasp/kea-clubs-app;
   on:
     all_branches: true
