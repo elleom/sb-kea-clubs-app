@@ -9,16 +9,12 @@ services:
 before_install:
   # login to docker registries
   - echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_USERNAME" --password-stdin
+  - docker build -t dlskeasp/kea-clubs-app .
+  - docker tag dlskeasp/kea-clubs-app dlskeasp/kea-clubs-app
 
 install:
   - mvn -N io.takari:maven:wrapper
   - ./mvnw install -Dmaven.javadoc.skip=true -B -V
-
-
-script:
-  # build docker images
-  - docker build -t dlskeasp/kea-clubs-app .
-  - docker tag dlskeasp/kea-clubs-app dlskeasp/kea-clubs-app
 
 deploy:
   provider: script
