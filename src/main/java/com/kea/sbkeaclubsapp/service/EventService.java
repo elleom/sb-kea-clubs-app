@@ -12,7 +12,11 @@ public interface EventService {
 
     List<Event> getEvents();
 
+    List<Event> getEventsSortedByStartDate();
+
     Event findById(Long l) throws Exception;
+
+
 
 //    RecipeCommand findCommandById(Long l);
 //    RecipeCommand saveRecipeCommand(RecipeCommand recipeCommand);

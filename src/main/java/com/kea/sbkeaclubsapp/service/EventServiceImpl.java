@@ -3,6 +3,7 @@ package com.kea.sbkeaclubsapp.service;
 import com.kea.sbkeaclubsapp.model.Event;
 import com.kea.sbkeaclubsapp.repositories.EventRepository;
 import net.bytebuddy.implementation.bytecode.Throw;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
 import java.util.*;
@@ -24,6 +25,13 @@ public class EventServiceImpl implements EventService {
     public List<Event> getEvents() {
         List<Event> events = new ArrayList<>();
         eventRepository.findAll().iterator().forEachRemaining(events::add);
+        return events;
+    }
+
+    @Override
+    public List<Event> getEventsSortedByStartDate() {
+        List<Event> events = new ArrayList<>();
+        eventRepository.findAll(Sort.by("start_date"));
         return events;
     }
 
