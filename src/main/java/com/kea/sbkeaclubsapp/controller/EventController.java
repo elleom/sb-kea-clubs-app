@@ -2,10 +2,7 @@ package com.kea.sbkeaclubsapp.controller;
 
 import com.kea.sbkeaclubsapp.model.Event;
 import com.kea.sbkeaclubsapp.service.EventServiceImpl;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -35,5 +32,10 @@ public class EventController {
         //todo clear
         List<Event> eventsList = eventService.getEventsSortedByStartDate();
         return eventsList;
+    }
+
+    @PostMapping
+    public Event createEvent(@RequestBody Event event) {
+        return event;
     }
 }
