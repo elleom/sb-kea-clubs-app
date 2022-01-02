@@ -33,7 +33,7 @@ public class EventController {
     @GetMapping
     public List<Event> getAllEvent(){
         //todo clear
-        List<Event> eventsList = eventService.getEvents();
+        List<Event> eventsList = eventService.getEventsSortedByStartDate();
         return eventsList;
     }
 }
