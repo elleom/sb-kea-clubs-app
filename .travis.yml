@@ -32,4 +32,4 @@ deploy:
     # push to dockerhub
     docker push dlskeasp/kea-clubs-apps;
   on:
-    all_branches: true
+    branch: master
