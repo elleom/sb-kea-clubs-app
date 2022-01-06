@@ -2,8 +2,6 @@ package com.kea.sbkeaclubsapp.service;
 
 import com.kea.sbkeaclubsapp.model.Event;
 import com.kea.sbkeaclubsapp.repositories.EventRepository;
-import net.bytebuddy.implementation.bytecode.Throw;
-import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
 import java.util.*;
@@ -22,16 +20,9 @@ public class EventServiceImpl implements EventService {
     }
 
     @Override
-    public List<Event> getEvents() {
-        List<Event> events = new ArrayList<>();
-        eventRepository.findAll().iterator().forEachRemaining(events::add);
-        return events;
-    }
-
-    @Override
     public List<Event> getEventsSortedByStartDate() {
         List<Event> events = new ArrayList<>();
-        eventRepository.findAll(Sort.by("start_date"));
+        events = eventRepository.findUpcomingFortnightEvents();
         return events;
     }
 
@@ -45,12 +36,22 @@ public class EventServiceImpl implements EventService {
     }
 
     @Override
-    public void deleteById(Long idToDelete) {
+    public Event createNewEvent(Event event) {
+        Event newEvent = eventRepository.save(event);
 
+        return newEvent;
     }
 
     @Override
-    public Event editById(Long l) {
-        return null;
+    public Event updateEvent(Event event) {
+        Event savedEvent = eventRepository.getById(event.getId());
+        savedEvent.setImageUrl(event.getImageUrl());
+        return eventRepository.save(savedEvent);
     }
+
+    @Override
+    public void deleteById(Long idToDelete) {
+        eventRepository.deleteById(idToDelete);
+    }
+
 }

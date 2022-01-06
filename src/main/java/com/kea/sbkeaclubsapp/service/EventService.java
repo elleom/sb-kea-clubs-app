@@ -10,19 +10,14 @@ import java.util.List;
  */
 public interface EventService {
 
-    List<Event> getEvents();
-
     List<Event> getEventsSortedByStartDate();
 
-    Event findById(Long l) throws Exception;
+    Event findById(Long l) throws Exception; // todo probably not needed
 
+    Event createNewEvent(Event event);
 
-
-//    RecipeCommand findCommandById(Long l);
-//    RecipeCommand saveRecipeCommand(RecipeCommand recipeCommand);
+    Event updateEvent(Event event);
 
     void deleteById(Long idToDelete);
-
-    Event editById(Long l);
 
 }

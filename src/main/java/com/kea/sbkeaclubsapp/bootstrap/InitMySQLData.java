@@ -50,7 +50,10 @@ public class InitMySQLData implements ApplicationListener {
             userRepository.save(user);
         }
 
-        Organization organization = organizationRepository.findById(20L).orElse(Organization.builder().id(1L).name("KEA FILMS").build());
+        Organization organization = organizationRepository.findById(19L).orElse(Organization.builder().id(1L).name("KEA FILMS").build());
+        if (organizationRepository.count() < 1) {
+            organizationRepository.save(organization);
+        }
 
         if (eventRepository.count() < 1) {
             log.debug("Adding test data");
@@ -58,6 +61,7 @@ public class InitMySQLData implements ApplicationListener {
                     .description("Bootstraped Event")
                     .userId(1L) //hardcoded
                     .type("Event")
+                    .title("The title")
                     .imageUrl("SomeURL")
                     .Location("Somewhere")
                     .organization(organization)

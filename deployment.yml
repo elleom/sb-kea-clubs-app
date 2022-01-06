@@ -1,0 +1,35 @@
+kind: Deployment
+apiVersion: apps/v1
+metadata:
+  name: kea-clubs-apps
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: kea-clubs-apps
+  template:
+    metadata:
+      labels:
+        app: kea-clubs-apps
+    spec:
+      containers:
+        - name: kea-clubs-apps
+          image: dlskeasp/kea-clubs-apps
+          imagePullPolicy: Always
+          ports:
+            - containerPort: 8080
+      restartPolicy: Always
+---
+kind: Service
+apiVersion: v1
+metadata:
+  name: kea-clubs-apps
+spec:
+  type: LoadBalancer
+  ports:
+    - port: 8080
+      targetPort: 8080
+      protocol: TCP
+      nodePort: 31000
+  selector:
+    app: kea-clubs-apps
