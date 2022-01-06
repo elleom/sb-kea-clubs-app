@@ -23,11 +23,12 @@ public class Event {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "id", nullable = false)
+    @Column(name = "id")
     private Long id;
 
     private Long userId;
     private String type;
+    private String title;
     private String description;
     @Column(name= "image_url", nullable = false)
     private String imageUrl;
@@ -40,10 +41,6 @@ public class Event {
     @ManyToOne
     @JoinColumn(name = "organization_id")
     private Organization organization;
-
-    public Organization getOrganization() {
-        return organization;
-    }
 
     @Override
     public boolean equals(Object o) {
